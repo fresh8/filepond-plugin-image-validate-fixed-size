@@ -3,10 +3,11 @@ import license from 'rollup-plugin-license';
 import { terser } from 'rollup-plugin-terser';
 import prettier from 'rollup-plugin-prettier';
 
-const createBanner = ({ id, version, license, homepage }) => ({banner:`/*!
- * ${ id } ${ version }
- * Licensed under ${ license }, https://opensource.org/licenses/${ license }/
- * Please visit ${ homepage } for details.
+const createBanner = ({ id, version, license, homepage }) => ({
+	banner: `/*!
+ * ${id} ${version}
+ * Licensed under ${license}, https://opensource.org/licenses/${license}/
+ * Please visit ${homepage} for details.
  */
 
 /* eslint-disable */
@@ -42,7 +43,7 @@ const createBuild = (options) => {
 		}))
 	}
 	plugins.push(license(createBanner(options)))
-	
+
 	// return Rollup config
 	return {
 		input: 'src/js/index.js',

@@ -8,7 +8,7 @@
     ],
     "plugins": [
         ["@babel/plugin-proposal-object-rest-spread", {
-            "loose": true, 
+            "loose": true,
             "useBuiltIns": true
         }]
     ]

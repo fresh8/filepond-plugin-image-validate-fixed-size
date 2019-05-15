@@ -14,7 +14,7 @@ const plugin = ({ addFilter, utils }) => {
 
         const onReceiveSize = ({ width, height }) => {
 
-            const {minWidth, minHeight, maxWidth, maxHeight, minResolution, maxResolution } = bounds;
+            const { minWidth, minHeight, maxWidth, maxHeight, minResolution, maxResolution } = bounds;
 
             const resolution = width * height;
 
@@ -31,7 +31,7 @@ const plugin = ({ addFilter, utils }) => {
             else if (maxResolution !== null && resolution > maxResolution) {
                 reject('TOO_HIGH_RES');
             }
-            
+
             // all is well
             resolve();
         };
@@ -42,7 +42,7 @@ const plugin = ({ addFilter, utils }) => {
 
                 // no custom measure method supplied, exit here
                 if (!measure) {
-                    reject(); 
+                    reject();
                     return;
                 }
 
@@ -61,7 +61,7 @@ const plugin = ({ addFilter, utils }) => {
         'LOAD_FILE',
         (file, { query }) =>
             new Promise((resolve, reject) => {
-                
+
                 if (!isFile(file) || !isImage(file) || !query('GET_ALLOW_IMAGE_VALIDATE_SIZE')) {
                     resolve(file);
                     return;
@@ -104,19 +104,19 @@ const plugin = ({ addFilter, utils }) => {
                                 details: query('GET_IMAGE_VALIDATE_SIZE_LABEL_EXPECTED_MAX_RESOLUTION')
                             }
                         }[error] : {
-                            label: query('GET_IMAGE_VALIDATE_SIZE_LABEL_FORMAT_ERROR'),
-                            details: file.type
-                        };
-    
+                                label: query('GET_IMAGE_VALIDATE_SIZE_LABEL_FORMAT_ERROR'),
+                                details: file.type
+                            };
+
                         reject({
                             status: {
                                 main: status.label,
-                                sub: error 
-                                    ? replaceInString(status.details, bounds) 
+                                sub: error
+                                    ? replaceInString(status.details, bounds)
                                     : status.details
                             }
                         });
-    
+
                     });
 
             })
@@ -142,12 +142,12 @@ const plugin = ({ addFilter, utils }) => {
             imageValidateSizeLabelImageResolutionTooHigh: ['Resolution is too high', Type.STRING],
             imageValidateSizeLabelExpectedMinResolution: ['Minimum resolution is {minResolution}', Type.STRING],
             imageValidateSizeLabelExpectedMaxResolution: ['Maximum resolution is {maxResolution}', Type.STRING],
-            
+
             // Required dimensions
-            imageValidateSizeMinWidth:[1, Type.INT], // needs to be at least one pixel
-            imageValidateSizeMinHeight:[1, Type.INT],
-            imageValidateSizeMaxWidth:[65535, Type.INT], // maximum size of JPEG, fine for now I guess
-            imageValidateSizeMaxHeight:[65535, Type.INT],
+            imageValidateSizeMinWidth: [1, Type.INT], // needs to be at least one pixel
+            imageValidateSizeMinHeight: [1, Type.INT],
+            imageValidateSizeMaxWidth: [65535, Type.INT], // maximum size of JPEG, fine for now I guess
+            imageValidateSizeMaxHeight: [65535, Type.INT],
 
             // Label to show when an image is too small or image is too big
             imageValidateSizeLabelImageSizeTooSmall: ['Image is too small', Type.STRING],
